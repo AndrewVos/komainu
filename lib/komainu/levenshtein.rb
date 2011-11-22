@@ -1,3 +1,5 @@
+require "komainu/trie_node"
+
 module Komainu
   class Levenshtein
     def initialize(words)
