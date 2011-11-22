@@ -14,20 +14,25 @@ module Komainu
 
     it "finds exact matches" do
       result = subject.search("Batman has")
-      result.size.should == 1
-      result.first.name.should == :item2
+      result.items.size.must_equal 1
+      result.items.first.name.must_equal :item2
     end
 
     it "finds matches in any case" do
       result = subject.search("BATMAN has")
-      result.size.should == 1
-      result.first.name.should == :item2
+      result.items.size.must_equal 1
+      result.items.first.name.must_equal :item2
     end
 
     it "finds matches if the text is not in order" do
       result = subject.search("has batman")
-      result.size.should == 1
-      result.first.name.should == :item2
+      result.items.size.must_equal 1
+      result.items.first.name.must_equal :item2
+    end
+
+    it "suggests an alternate query" do
+      result = subject.search("btman")
+      result.suggestion.must_equal "Batman"
     end
   end
 end
