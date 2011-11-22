@@ -9,11 +9,11 @@ module Komainu
 
     def search query
       results = SearchResults.new
-      @data_to_search.each do |name, text|
-        if text_includes_string(text, query)
-          results.items << SearchResult.new(name, text)
-        elsif text_includes_words_from_string(text, query)
-          results.items << SearchResult.new(name, text)
+      @data_to_search.each do |searchable|
+        if text_includes_string(searchable.text, query)
+          results.items << searchable
+        elsif text_includes_words_from_string(searchable.text, query)
+          results.items << searchable
         end
       end
 
@@ -24,7 +24,7 @@ module Komainu
     private
 
     def calculate_suggestion(query)
-      words = split_into_words(@data_to_search.values.join(" "))
+      words = split_into_words(@data_to_search.map { |searchable| searchable.text }.join(" "))
       levenshtein = Levenshtein.new(words)
       suggestion = split_into_words(query).map do |word|
         matches = levenshtein.search(word, 2)

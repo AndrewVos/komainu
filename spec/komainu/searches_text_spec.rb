@@ -6,10 +6,13 @@ module Komainu
     subject { SearchesText.new(data_to_search) }
 
     let :data_to_search do
-      {
-        :item1 => "This is some text",
-        :item2 => "Batman has no parents"
-      }
+      item1 = OpenStruct.new
+      item1.name = :item1
+      item1.text = "This is some text"
+      item2 = OpenStruct.new
+      item2.name = :item2
+      item2.text = "Batman has no parents"
+      [item1, item2]
     end
 
     it "finds exact matches" do
