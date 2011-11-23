@@ -10,13 +10,14 @@ task :execute_examples do
 end
 
 def execute_examples(file)
+  require "komainu"
   puts "Executing Examples..."
   errors = []
   contents = File.read(file)
   contents.scan(/:example:((?:(?!^:end:).)*)/m).flatten.each do |example|
     if example.include?("#=>")
       expected = example.scan(/#=>\s*(.*)/).first.first
-      actual = eval(example).to_s
+      actual = eval(example).inspect
       if actual == expected
         print "."
       else

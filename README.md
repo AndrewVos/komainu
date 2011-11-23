@@ -9,11 +9,12 @@ A very simple text search tool.
 ### Simple Search
 
 ```ruby
-1 + 2
-#=> 3
-```
+item1 = OpenStruct.new
+item1.text = "hello"
+item2 = OpenStruct.new
+item2.text = "world"
+searchables = [item1, item2]
+Komainu.search("world", searchables)
 
-```ruby
-1 + 5
-#=> 6
+#=> {:suggestion=>nil, :items=>["world"]}
 ```
