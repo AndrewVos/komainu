@@ -18,3 +18,13 @@ Komainu.search("world", searchables)
 
 #=> {:suggestion=>nil, :items=>["world"]}
 ```
+
+### Suggestions
+```ruby
+item = OpenStruct.new
+item.text = "Batman has no parents :("
+searchables = [item]
+Komainu.search("bertman", searchables)
+
+#=> {:suggestion=>"Batman", :items=>[]}
+```
