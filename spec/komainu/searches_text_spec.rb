@@ -8,7 +8,7 @@ module Komainu
     let :data_to_search do
       item1 = OpenStruct.new
       item1.name = :item1
-      item1.text = "This is some text"
+      item1.text = "This is some text."
       item2 = OpenStruct.new
       item2.name = :item2
       item2.text = "Batman has no parents"
@@ -36,6 +36,18 @@ module Komainu
     it "suggests an alternate query" do
       result = subject.search("btman")
       result.suggestion.must_equal "Batman"
+    end
+
+    it "only suggests an alternate query if the alternate query is different" do
+      result = subject.search("Batman")
+      result.suggestion.must_be_nil
+    end
+
+    it "finds the best suggestion" do
+      item = OpenStruct.new
+      item.text = "helloo hellp"
+      result = SearchesText.new([item]).search("hell")
+      result.suggestion.must_equal "hellp"
     end
   end
 end

@@ -26,11 +26,20 @@ module Komainu
     def calculate_suggestion(query)
       words = split_into_words(@data_to_search.map { |searchable| searchable.text }.join(" "))
       levenshtein = Levenshtein.new(words)
+
+      found_suggestion = false
       suggestion = split_into_words(query).map do |word|
         matches = levenshtein.search(word, 2)
-        matches.keys.first || word
+
+        if matches.empty? != true && matches.keys.first != word
+          found_suggestion = true
+          matches.sort {|a,b| a[1] <=> b[1]}.first.first
+        else
+          word
+        end
       end
-      suggestion.join(" ")
+
+      suggestion.join(" ") if found_suggestion
     end
 
     def split_into_words(string)
