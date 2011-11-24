@@ -3,6 +3,8 @@ komainu
 
 A very simple text search tool.
 
+[![Build Status](https://secure.travis-ci.org/AndrewVos/komainu.png)](http://travis-ci.org/AndrewVos/komainu)
+
 ## Examples
 
 ### Simple Search
