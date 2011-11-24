@@ -9,10 +9,6 @@ module Komainu
       end
     end
 
-    def best_match word
-      "Batman"
-    end
-
     def search word, maximum_distance
       current_row = (0..word.length).to_a
       results = {}
