@@ -26,7 +26,7 @@ module Komainu
         insert_cost = current_row[column - 1] + 1
         delete_cost = previous_row[column] + 1
 
-        if word[column - 1] != letter
+        if word[column - 1] != letter[0]
           replace_cost = previous_row[column - 1] + 1
         else
           replace_cost = previous_row[column - 1]
