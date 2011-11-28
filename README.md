@@ -14,13 +14,18 @@ require "komainu"
 require "ostruct"
 
 item1 = OpenStruct.new
-item1.text = "hello"
-item2 = OpenStruct.new
-item2.text = "world"
-searchables = [item1, item2]
-Komainu.search("world", searchables)
+item1.text = "You are a smelly pirate hooker."
 
-#=> {:suggestion=>nil, :items=>["world"]}
+item2 = OpenStruct.new
+item2.text = "You look like a blueberry."
+
+item3 = OpenStruct.new
+item3.text = "Why don't you go back to your home on Whore Island?"
+
+searchables = [item1, item2]
+Komainu.search("blue", searchables)
+
+#=> {:suggestion=>nil, :items=>["You look like a blueberry."]}
 ```
 
 ### Suggestions
