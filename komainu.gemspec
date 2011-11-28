@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.version     = Komainu::VERSION
   s.authors     = ["Andrew Vos"]
   s.email       = ["andrew.vos@gmail.com"]
-  s.homepage    = ""
-  s.summary     = %q{}
-  s.description = %q{}
+  s.homepage    = "https://github.com/AndrewVos/komainu"
+  s.summary     = %q{Simple text search}
+  s.description = %q{Simple text search using a mixture of basic string search and Levenshtein Distance}
 
   s.rubyforge_project = "komainu"
 
