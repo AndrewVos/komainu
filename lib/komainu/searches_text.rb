@@ -10,9 +10,7 @@ module Komainu
     def search query
       results = SearchResults.new
       @data_to_search.each do |searchable|
-        if text_includes_string(searchable.text, query)
-          results.items << searchable
-        elsif text_includes_words_from_string(searchable.text, query)
+        if text_includes_words_from_string(searchable.text, query)
           results.items << searchable
         end
       end
