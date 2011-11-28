@@ -1,10 +1,10 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "spec_helper"))
-require "komainu/levenshtein"
+require "komainu/calculates_levenshtein_distance"
 
 module Komainu
-  describe Levenshtein do
+  describe CalculatesLevenshteinDistance do
     it "finds words with a distance less the maximum distance" do
-      levenshtein = Levenshtein.new(["hello", "there", "good", "sirs"])
+      levenshtein = CalculatesLevenshteinDistance.new(["hello", "there", "good", "sirs"])
       levenshtein.search("hell", 14).must_equal({
         "hello" => 1,
         "there" => 3,

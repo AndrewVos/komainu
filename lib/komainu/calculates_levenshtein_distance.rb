@@ -1,7 +1,7 @@
 require "komainu/trie_node"
 
 module Komainu
-  class Levenshtein
+  class CalculatesLevenshteinDistance
     def initialize(words)
       @trie = TrieNode.new
       words.each do |word|

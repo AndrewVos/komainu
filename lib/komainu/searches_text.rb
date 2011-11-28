@@ -1,4 +1,4 @@
-require "komainu/levenshtein"
+require "komainu/calculates_levenshtein_distance"
 require "komainu/search_results"
 require "komainu/match"
 
@@ -33,7 +33,7 @@ module Komainu
 
     def calculate_suggestion(query)
       words = split_into_words(@data_to_search.map { |searchable| searchable.text }.join(" "))
-      levenshtein = Levenshtein.new(words)
+      levenshtein = CalculatesLevenshteinDistance.new(words)
 
       suggestion = split_into_words(query).map do |word|
         matches = levenshtein.search(word, 2)
