@@ -1,7 +1,16 @@
 require "komainu/levenshtein"
 require "komainu/search_results"
+require "komainu/match"
 
 module Komainu
+  class SearchResult
+    attr_reader :object, :matches
+    def initialize object, matches
+      @object = object
+      @matches = matches
+    end
+  end
+
   class SearchesText
     def initialize data_to_search
       @data_to_search = data_to_search
@@ -10,8 +19,9 @@ module Komainu
     def search query
       results = SearchResults.new
       @data_to_search.each do |searchable|
-        if text_includes_words_from_string(searchable.text, query)
-          results.items << searchable
+        matches = find_matches(searchable.text, query)
+        if matches.any?
+          results.items << SearchResult.new(searchable, matches)
         end
       end
 
@@ -47,14 +57,18 @@ module Komainu
       string.scan(/\b\w+\b/)
     end
 
-    def text_includes_string text, string
-      text.downcase.include? string.downcase
-    end
-
-    def text_includes_words_from_string text, string
-      string.split(" ").any? do |word|
-        text_includes_string(text, word)
-      end
+    def find_matches text, string
+      text = text.downcase
+      matches = []
+      string.split(" ").each { |word|
+        word = word.downcase
+        offset = 0
+        while matched_index = text.index(word, offset)
+          matches << Match.new(matched_index, word)
+          offset += word.length
+        end
+      }
+      matches
     end
   end
 end
