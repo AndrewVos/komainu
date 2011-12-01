@@ -52,11 +52,13 @@ module Komainu
 
       result = SearchesText.new([item]).search("derp herp")
 
+      result.items.first.matches.size.must_equal 2
+
       result.items.first.matches[0].text.must_equal "derp"
       result.items.first.matches[0].index.must_equal 0
 
-      result.items.first.matches[2].text.must_equal "herp"
-      result.items.first.matches[2].index.must_equal 5
+      result.items.first.matches[1].text.must_equal "herp"
+      result.items.first.matches[1].index.must_equal 5
     end
   end
 end

@@ -60,12 +60,12 @@ module Komainu
     def find_matches text, string
       text = text.downcase
       matches = []
+      offset = 0
       string.split(" ").each { |word|
         word = word.downcase
-        offset = 0
         while matched_index = text.index(word, offset)
           matches << Match.new(matched_index, word)
-          offset += word.length
+          offset = matched_index + 1
         end
       }
       matches
